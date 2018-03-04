@@ -55,7 +55,7 @@ define('oracle/controllers/application', ['exports', 'oracle/config/environment'
     tickIter: 0,
     maxWords: 100,
     message: '',
-    sampleSoftmaxTemperature: 0.30,
+    sampleSoftmaxTemperature: 0.80,
     loadModel: function loadModel(j) {
       console.log(j);
       this.hiddenSizes = j.hiddenSizes;
