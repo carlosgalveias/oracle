@@ -33,7 +33,7 @@ define('oracle/components/welcome-page', ['exports', 'ember-welcome-page/compone
     }
   });
 });
-define('oracle/controllers/application', ['exports'], function (exports) {
+define('oracle/controllers/application', ['exports', 'oracle/config/environment'], function (exports, _environment) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
@@ -140,7 +140,7 @@ define('oracle/controllers/application', ['exports'], function (exports) {
     init: function init() {
       var _this = this;
 
-      $.getJSON("/assets/data/en.json", function (data) {
+      $.getJSON(_environment.default.rootURL + "assets/data/en.json", function (data) {
         _this.loadModel(data);
       });
     },
