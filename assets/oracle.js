@@ -55,6 +55,7 @@ define('oracle/controllers/application', ['exports', 'oracle/config/environment'
     tickIter: 0,
     maxWords: 100,
     message: '',
+    sample: '.',
     sampleSoftmaxTemperature: 0.80,
     loadModel: function loadModel(j) {
       console.log(j);
@@ -147,7 +148,7 @@ define('oracle/controllers/application', ['exports', 'oracle/config/environment'
     getPrediction: function getPrediction(text) {
       var _this2 = this;
 
-      var pred = this.predictSentence(this.model, text, this.sampleSoftmaxTemperature);
+      var pred = this.predictSentence(this.model, this.sample, this.sampleSoftmaxTemperature);
       this.set('waiting', false);
       var text = '';
       var index = 0;
@@ -156,9 +157,11 @@ define('oracle/controllers/application', ['exports', 'oracle/config/environment'
       var _loop = function _loop() {
         var word = pred[n];
         var t = text;
+
         if (word.match(/[\.,:;\?\(\)]/)) {
           t += word;
         } else {
+          _this2.set('sample', word);
           t += ' ' + word;
         }
         Ember.run.later(function () {
